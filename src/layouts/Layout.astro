@@ -1,16 +1,16 @@
 ---
 // Supports weights 100-900
-import '@fontsource-variable/noto-serif';
-import '@fontsource-variable/noto-sans';
+import '@fontsource-variable/noto-serif'
+import '@fontsource-variable/noto-sans'
 
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
 
 interface Props {
-	title: string;
+	title: string
 }
 
-const { title } = Astro.props;
+const { title } = Astro.props
 ---
 
 <!doctype html>
@@ -33,7 +33,7 @@ const { title } = Astro.props;
 </html>
 <style is:global>
   :root {
-    color-scheme: light dark;
+    color-scheme: dark light;
   }
   body {
     display: grid;

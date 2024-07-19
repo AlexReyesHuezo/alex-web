@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import ProfilePic from '../assets/profile.png';
+import { Image } from 'astro:assets'
+import ProfilePic from '../assets/profile.png'
 ---
 
 <section class="grid grid-cols-1 gap-4 lg:grid-cols-8 text-center content-center lg:text-left min-h-screen max-w-screen-lg">
@@ -37,12 +37,13 @@ import ProfilePic from '../assets/profile.png';
 
   </div>
   
-  <div id="picture" class="lg:col-start-7 lg_col-end-8">
+  <div id="picture" class="lg:col-start-7 lg-col-end-8">
     <figure>
       <Image
+        style="mask-image: linear-gradient(to bottom, black 55%, transparent 75%);"
         src={ProfilePic}
         alt="Alexander Reyes' profile pic"
-        class="w-48 h-48 mx-auto object-contain scale-150 transition-transform	 hover:scale-125 motion-reduce:transition-none motion-reduce:hover:transform-none"
+        class="w-48 h-48 mx-auto object-contain scale-150 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-150 duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
         loading="eager"
       />
     </figure>

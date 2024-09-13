@@ -1,27 +1,38 @@
 ---
 // Supports weights 100-900
-import '@fontsource-variable/noto-serif'
-import '@fontsource-variable/noto-sans'
+import "@fontsource-variable/noto-serif";
+import "@fontsource-variable/noto-sans";
 
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
-	title: string
+  title: string;
 }
 
-const { title } = Astro.props
+const { title } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="TODO" />
+    <meta name="theme-color" content="#00addd" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="description"
+      content="Web developer, writer. I strive to improve accessibility. ⟪Buy the truth and don't sell it.⟫"
+    />
+    <meta
+      name="keywords"
+      content="web developer, web accessibility, web security, portfolio, blog"
+    />
+    <meta name="author" content="Alexander Reyes" />
+    <meta name="robots" content="index, follow" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <link rel="canonical" href="https://alexander-reyes.com" />
   </head>
   <body class="dark bg-gradient-to-bl from-slate-950 via-cyan-700 to-sky-900">
     <Header />

@@ -3,29 +3,20 @@ import { Image } from "astro:assets";
 import ProfilePic from "../assets/profile.png";
 ---
 
-<section
-  class="grid min-h-screen max-w-screen-lg grid-cols-1 content-center gap-4 text-center lg:grid-cols-8 lg:text-left"
->
-  <div id="tagline" class="lg:col-start-2 lg:col-end-7">
-    <h1 class="font-serif text-5xl font-extrabold sm:text-4xl">
-      Alexander Reyes
-    </h1>
-    <p class="text-balance text-lg">
-      I'm a passionate <strong class="font-bold">fullstack web developer</strong
-      > from El Salvador with a deep interest in appealing <em
-        class="font-light">UI/UX</em
-      >, <em class="font-light">web accessibility</em> and <em
-        class="font-light">web security</em
-      >.
+<section>
+  <div id="tagline">
+    <h1>Alexander Reyes</h1>
+    <p>
+      I'm a passionate <strong>fullstack web developer</strong> from El Salvador
+      with a deep interest in appealing <em>UI/UX</em>, <em
+        >web accessibility</em
+      > and <em>web security</em>.
     </p>
 
-    <hr class="mx-auto my-8 h-px border-0 bg-sky-400 sm:w-1/2 lg:mx-0" />
+    <hr />
 
-    <p
-      class="flex flex-wrap justify-center space-x-4 text-sm sm:content-center sm:justify-center sm:justify-items-center lg:justify-start"
-    >
+    <p>
       <a
-        class="my-2 rounded-full bg-sky-950 px-3 py-1 text-sky-200 transition hover:scale-110 motion-reduce:transition-none motion-reduce:hover:transform-none sm:after:content-none md:after:content-['_↗']"
         href="https://github.com/AlexReyesHuezo"
         target="_blank"
         rel="noopener noreferrer"
@@ -33,7 +24,6 @@ import ProfilePic from "../assets/profile.png";
         Github
       </a>
       <a
-        class="my-2 rounded-full bg-sky-950 px-3 py-1 text-sky-100 transition hover:scale-110 motion-reduce:transition-none motion-reduce:hover:transform-none sm:after:content-none md:after:content-['_↗']"
         href="https://www.linkedin.com/in/alexreyeshuezo"
         target="_blank"
         rel="noopener noreferrer"
@@ -41,7 +31,6 @@ import ProfilePic from "../assets/profile.png";
         LinkedIn
       </a>
       <a
-        class="my-2 rounded-full bg-sky-950 px-3 py-1 text-sky-100 transition hover:scale-110 motion-reduce:transition-none motion-reduce:hover:transform-none sm:after:content-none md:after:content-['_↗']"
         href="https://drive.google.com/file/d/1OoLoR7CdQSa5-7dXnGdWfMasXYX3IjKA/view?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
@@ -51,13 +40,11 @@ import ProfilePic from "../assets/profile.png";
     </p>
   </div>
 
-  <div id="picture" class="lg-col-end-8 lg:col-start-7">
+  <div id="picture">
     <figure>
       <Image
-        style="mask-image: linear-gradient(to bottom, black 55%, transparent 75%);"
         src={ProfilePic}
         alt="Alexander Reyes' profile pic"
-        class="mx-auto h-48 w-48 scale-150 object-contain transition delay-75 duration-300 ease-in-out hover:-translate-y-1 hover:scale-150 motion-reduce:transition-none motion-reduce:hover:transform-none"
         loading="eager"
       />
     </figure>

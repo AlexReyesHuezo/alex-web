@@ -3,50 +3,42 @@ import { Image } from "astro:assets";
 import ProfilePic from "@assets/profile.png";
 ---
 
-<section>
-  <div id="tagline">
-    <h1>Alexander Reyes</h1>
-    <p>
-      I'm a <strong>fullstack web developer</strong> and <strong>writer</strong>
-      with special interest in appealing <em>UI/UX</em>, improving <em
-        >web accessibility</em
-      > and adhering to <em>web security</em> guidelines.
-    </p>
+<section id="hero" class="hero">
+  <div class="hero-grid">
+    <article id="tagline" class="tagline">
+      <h1>Alexander Reyes</h1>
+      <p>
+        I'm a <strong>fullstack web developer</strong> and <strong
+          >writer</strong
+        >with special interest in appealing <em>UI/UX</em>, improving <em
+          >web accessibility</em
+        > and adhering to <em>web security</em> guidelines.
+      </p>
+    </article>
 
-    <hr />
+    <div id="picture" class="picture">
+      <figure>
+        <Image
+          src={ProfilePic}
+          alt="Alexander Reyes' profile pic"
+          loading="eager"
+        />
+      </figure>
+    </div>
 
-    <p>
-      <a
-        href="https://github.com/AlexReyesHuezo"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Github
-      </a>
-      <a
-        href="https://www.linkedin.com/in/alexreyeshuezo"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        LinkedIn
-      </a>
-      <a
-        href="https://drive.google.com/file/d/1OoLoR7CdQSa5-7dXnGdWfMasXYX3IjKA/view?usp=sharing"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Download my Resume
-      </a>
-    </p>
-  </div>
+    <div class="hero-illustration">
+      <div class="center-circle">Fullstack Web developer</div>
+      <div class="bubble a11y">Digital accessibility</div>
+      <div class="bubble frontend">Frontend</div>
+      <div class="bubble backend">Backend</div>
+      <div class="bubble ui-ux">UI/UX</div>
+      <div class="bubble writing">Writing</div>
+    </div>
 
-  <div id="picture">
-    <figure>
-      <Image
-        src={ProfilePic}
-        alt="Alexander Reyes' profile pic"
-        loading="eager"
-      />
-    </figure>
+    <article class="hero-bits">
+      <p>20+ repositories</p>
+      <p>270+ contributions last year</p>
+      <p>5+ articles</p>
+    </article>
   </div>
 </section>

@@ -3,8 +3,8 @@
 import "@fontsource-variable/noto-serif";
 import "@fontsource-variable/noto-sans";
 
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 
 interface Props {
   title: string;
@@ -34,7 +34,7 @@ const { description } = Astro.props;
     <title>{title}</title>
     <link rel="canonical" href="https://alexander-reyes.com" />
   </head>
-  <body class="dark bg-gradient-to-bl from-slate-950 via-cyan-700 to-sky-900">
+  <body>
     <Header />
     <main>
       <slot />
@@ -44,10 +44,129 @@ const { description } = Astro.props;
 </html>
 <style is:global>
   :root {
+    /* Color palette */
     color-scheme: dark light;
+    --color-primary: #1e90ff;
+    --color-primary-dark: #00509e;
+    --color-primary-light: #b3d4fc;
+    --color-secondary: #ffc107;
+    --color-secondary-dark: #ffa726;
+    --color-secondary-light: #ffd380;
+    --color-tertiary: #ff5722;
+    --color-tertiary-dark: #e64a19;
+    --color-tertiary-light: #ffab91;
+    --color-bg-light: #f4f4f4;
+    --color-bg-dark: #333;
+    --color-text-dark: #4a4a4a;
+    --color-text-light: #fefefe;
   }
+  /* Global styles */
   body {
     display: grid;
     justify-content: center;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+  }
+  h1 {
+    font-family: "Noto Serif", serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary-dark);
+  }
+  h2 {
+    font-family: "Noto Serif", serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary-dark);
+  }
+  h3 {
+    font-family: "Noto Serif", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary-dark);
+  }
+  h4 {
+    font-family: "Noto Serif", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary-dark);
+  }
+  h5 {
+    font-family: "Noto Serif", serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary-dark);
+  }
+  h6 {
+    font-family: "Noto Serif", serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary-dark);
+  }
+  button {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
+  }
+  button.primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+  }
+  button.primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+  button.secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-dark);
+  }
+  button.secondary:hover {
+    background-color: var(--color-secondary-dark);
+  }
+  button.tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--color-text-light);
+  }
+  button.tertiary:hover {
+    background-color: var(--color-tertiary-dark);
+  }
+  a {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+  a:hover {
+    color: var(--color-primary);
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes slideIn {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
 </style>

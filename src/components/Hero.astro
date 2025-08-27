@@ -1,6 +1,16 @@
 ---
+import { getGitHubStats } from "../services/github";
 import { Image } from "astro:assets";
 import ProfilePic from "@assets/profile.webp";
+
+const initialStats = {
+  repos: '...',
+  contributions: '...',
+  error: '',
+  loading: true
+};
+
+const username = 'alexreyeshuezo';
 ---
 
 <section id="hero" class="hero">
@@ -12,9 +22,17 @@ import ProfilePic from "@assets/profile.webp";
       </p>
     </article>
 
-    <article class="hero-bits">
-      <p><span>20+</span> repositories</p>
-      <p><span>270+</span> contributions last year</p>
+    <article class="hero-bits" role="region" aria-label="Developer stats">
+      <p class={initialStats.loading ? 'loading' : ''}>
+        <span class="number" data-error={initialStats.error}>
+          <span class="value" data-stats="repos">{initialStats.repos}</span>  
+        </span> repositories
+      </p>
+      <p class={initialStats.loading ? 'loading' : ''}>
+        <span class="number" data-error={initialStats.error}>
+          <span class="value" data-stats="contributions">{initialStats.contributions}</span>
+        </span> contributions last year
+      </p>
       <p><span>5+</span> articles</p>
     </article>
 
@@ -28,6 +46,31 @@ import ProfilePic from "@assets/profile.webp";
     </figure>
   </div>
 </section>
+
+<script>
+  import { getGitHubStats } from "../services/github";
+
+  async function fetchGitHubStats() {
+    try {
+      const stats = await getGitHubStats('alexreyeshuezo');
+
+      document.querySelectorAll('[data-stats="repos"]').forEach(el => {
+        el.textContent = stats.repos;
+      });
+      document.querySelectorAll('[data-stats="contributions"]').forEach(el => {
+        el.textContent = stats.contributions;
+      });
+      document.querySelectorAll('.hero-bits p').forEach(el => {
+        el.classList.remove('loading');
+      });
+
+    } catch (error) {
+      console.error('Failed to fetch GitHub stats:', error);
+    }
+  }
+
+  fetchGitHubStats();
+</script>
 
 <style>
   .hero {
@@ -84,6 +127,28 @@ import ProfilePic from "@assets/profile.webp";
   .hero-bits p span {
     font-weight: 700;
     color: var(--color-text-light);
+  }
+  .loading {
+    position: relative;
+    overflow: hidden;
+  }
+  .loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: loadingShimmer 1.5s infinite;
+  }
+  @keyframes loadingShimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
   }
   .picture {
     grid-area: picture;

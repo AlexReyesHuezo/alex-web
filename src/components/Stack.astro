@@ -1,0 +1,288 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const stackItems = {
+    frontend: ["React", "Astro", "Tailwind", "TypeScript"],
+    backend: ["Node.js", "Python", "Go", "PostgreSQL"],
+    ai: ["TensorFlow", "PyTorch", "LangChain", "OpenAI"],
+    cybersecurity: ["Kali", "Wireshark", "Burp Suite", "OWASP"],
+};
+---
+
+<section id="stack" class="stack-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="text-gradient">
+                {t("nav.stack")}
+            </span>
+        </h2>
+
+        <div class="bento-grid">
+            <!-- Frontend: Large box -->
+            <div class="bento-item large group">
+                <div class="bento-header">
+                    <div class="icon-box icon-indigo">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><rect
+                                width="18"
+                                height="18"
+                                x="3"
+                                y="3"
+                                rx="2"
+                                ry="2"></rect><path d="M9 3v18"></path><path
+                                d="m14 9 3 3-3 3"></path></svg
+                        >
+                    </div>
+                    <h3 class="bento-title">{t("stack.frontend")}</h3>
+                </div>
+                <div class="tags">
+                    {
+                        stackItems.frontend.map((item) => (
+                            <span class="tag tag-indigo">{item}</span>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Backend: Tall box -->
+            <div class="bento-item tall group">
+                <div class="bento-header">
+                    <div class="icon-box icon-purple">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><rect
+                                width="20"
+                                height="8"
+                                x="2"
+                                y="2"
+                                rx="2"
+                                ry="2"></rect><rect
+                                width="20"
+                                height="8"
+                                x="2"
+                                y="14"
+                                rx="2"
+                                ry="2"></rect><line
+                                x1="6"
+                                x2="6.01"
+                                y1="6"
+                                y2="6"></line><line
+                                x1="6"
+                                x2="6.01"
+                                y1="18"
+                                y2="18"></line></svg
+                        >
+                    </div>
+                    <h3 class="bento-title">{t("stack.backend")}</h3>
+                </div>
+                <div class="tags">
+                    {
+                        stackItems.backend.map((item) => (
+                            <span class="tag tag-purple">{item}</span>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- AI: Medium box -->
+            <div class="bento-item group">
+                <div class="bento-header">
+                    <div class="icon-box icon-emerald">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"
+                            ></path><path d="M8.5 8.5v.01"></path><path
+                                d="M16 12v.01"></path><path d="M12 16v.01"
+                            ></path></svg
+                        >
+                    </div>
+                    <h3 class="bento-title">{t("stack.ai")}</h3>
+                </div>
+                <div class="tags">
+                    {
+                        stackItems.ai.map((item) => (
+                            <span class="tag tag-emerald">{item}</span>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Cybersecurity: Medium box -->
+            <div class="bento-item group">
+                <div class="bento-header">
+                    <div class="icon-box icon-red">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                            ></path></svg
+                        >
+                    </div>
+                    <h3 class="bento-title">{t("stack.cybersecurity")}</h3>
+                </div>
+                <div class="tags">
+                    {
+                        stackItems.cybersecurity.map((item) => (
+                            <span class="tag tag-red">{item}</span>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .stack-section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        position: relative;
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .bento-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 64rem; /* max-w-5xl */
+        margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+        .bento-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .bento-item {
+        padding: 1.5rem;
+        border-radius: 1rem;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        transition: border-color 0.3s ease;
+    }
+
+    .bento-item:hover {
+        border-color: rgba(99, 102, 241, 0.5); /* indigo-500/50 */
+    }
+
+    @media (min-width: 768px) {
+        .bento-item.large {
+            grid-column: span 2;
+        }
+
+        .bento-item.tall {
+            grid-row: span 2;
+        }
+    }
+
+    .bento-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .icon-box {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-indigo {
+        background-color: rgba(99, 102, 241, 0.2);
+        color: #818cf8;
+    }
+    .icon-purple {
+        background-color: rgba(168, 85, 247, 0.2);
+        color: #c084fc;
+    }
+    .icon-emerald {
+        background-color: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+    }
+    .icon-red {
+        background-color: rgba(239, 68, 68, 0.2);
+        color: #f87171;
+    }
+
+    .bento-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        background-color: var(--color-surface);
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-surface);
+        transition: border-color 0.3s ease;
+    }
+
+    .bento-item:hover .tag-indigo {
+        border-color: rgba(99, 102, 241, 0.3);
+    }
+    .bento-item:hover .tag-purple {
+        border-color: rgba(168, 85, 247, 0.3);
+    }
+    .bento-item:hover .tag-emerald {
+        border-color: rgba(16, 185, 129, 0.3);
+    }
+    .bento-item:hover .tag-red {
+        border-color: rgba(239, 68, 68, 0.3);
+    }
+</style>

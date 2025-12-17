@@ -1,0 +1,252 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Props {
+    posts: any[];
+}
+
+const { posts } = Astro.props;
+
+const sortedPosts = posts
+    .sort(
+        (a, b) =>
+            new Date(b.frontmatter.pubDate).valueOf() -
+            new Date(a.frontmatter.pubDate).valueOf(),
+    )
+    .slice(0, 3);
+---
+
+<section id="blogs" class="blogs-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="text-gradient">
+                {t("nav.blogs")}
+            </span>
+        </h2>
+
+        <div class="blogs-grid">
+            {
+                sortedPosts.map((post) => (
+                    <a href={post.url} class="blog-card group">
+                        <div class="blog-image-wrapper">
+                            <img
+                                src={post.frontmatter.image}
+                                alt={post.frontmatter.title}
+                                class="blog-image"
+                            />
+                            <div class="blog-overlay">
+                                <span class="read-more">
+                                    {t("blog.readMore")}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <time datetime={post.frontmatter.pubDate}>
+                                    {new Date(
+                                        post.frontmatter.pubDate,
+                                    ).toLocaleDateString(lang, {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    })}
+                                </time>
+                            </div>
+                            <h3 class="blog-title">{post.frontmatter.title}</h3>
+                            <p class="blog-desc">
+                                {post.frontmatter.description}
+                            </p>
+                            <div class="blog-tags">
+                                {post.frontmatter.tags &&
+                                    post.frontmatter.tags.map(
+                                        (tag: unknown) => (
+                                            <span class="blog-tag">#{tag}</span>
+                                        ),
+                                    )}
+                            </div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+
+        <div class="view-all-container">
+            <a href={lang === "es" ? "/es/blog" : "/blog"} class="view-all-btn">
+                {t("blog.viewAll")}
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                    ></path></svg
+                >
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .blogs-section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        position: relative;
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .blogs-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+        .blogs-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .blogs-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .blog-card {
+        display: block;
+        border-radius: 1rem;
+        overflow: hidden;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(99, 102, 241, 0.5);
+    }
+
+    .blog-image-wrapper {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .blog-image {
+        transform: scale(1.1);
+    }
+
+    .blog-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(2, 6, 23, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .blog-card:hover .blog-overlay {
+        opacity: 1;
+    }
+
+    .read-more {
+        color: white;
+        font-weight: 500;
+        border: 1px solid white;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+    }
+
+    .blog-content {
+        padding: 1.5rem;
+    }
+
+    .blog-meta {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        margin-bottom: 0.5rem;
+    }
+
+    .blog-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+        transition: color 0.3s ease;
+    }
+
+    .blog-card:hover .blog-title {
+        color: var(--color-primary);
+    }
+
+    .blog-desc {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .blog-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .blog-tag {
+        font-size: 0.75rem;
+        color: var(--color-primary);
+    }
+
+    .view-all-container {
+        text-align: center;
+    }
+
+    .view-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .view-all-btn:hover {
+        background-color: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+    }
+</style>

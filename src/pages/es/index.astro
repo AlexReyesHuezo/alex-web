@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Stack from "../../components/Stack.astro";
+import Social from "../../components/Social.astro";
+import Projects from "../../components/Projects.astro";
+import Quotes from "../../components/Quotes.astro";
+import LastBlogs from "../../components/LastBlogs.astro";
+import Header from "../../components/Header.astro";
+const posts = await Astro.glob("./blog/*.md");
+---
+
+<Layout title="Alexander Reyes - Desarrollador" lang="es">
+    <Header />
+    <main>
+        <Hero />
+        <Social />
+        <Projects />
+        <Stack />
+        <LastBlogs posts={posts} />
+        <Quotes />
+    </main>
+</Layout>

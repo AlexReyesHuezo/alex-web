@@ -1,172 +1,163 @@
 ---
-// Supports weights 100-900
-import "@fontsource-variable/noto-serif";
+import { ViewTransitions } from "astro:transitions";
 import "@fontsource-variable/noto-sans";
-
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
+import "@fontsource-variable/noto-serif";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
-  description: string;
-  image?: string;
+  lang?: string;
 }
 
-const { title } = Astro.props;
-const { description } = Astro.props;
+const { title, lang = "en" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="theme-color" content="#00addd" />
+    <meta name="description" content="Alex Reyes Huezo - Personal Website" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="web developer, web accessibility, web security, portfolio, blog"
-    />
-    <meta name="author" content="Alexander Reyes" />
-    <meta name="robots" content="index, follow" />
-    <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link rel="canonical" href="https://alexander-reyes.com" />
+    <ViewTransitions />
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
+    <div class="background">
+      <div class="blur-circle"></div>
+    </div>
+    <slot />
     <Footer />
-  </body>
+  </body><style is:global>
+    :root {
+      --color-bg: #020617; /* slate-950 */
+      --color-text: #f1f5f9; /* slate-100 */
+      --color-text-muted: #94a3b8; /* slate-400 */
+
+      --color-primary: #6366f1; /* indigo-500 */
+      --color-primary-hover: #4f46e5; /* indigo-600 */
+      --color-secondary: #a855f7; /* purple-500 */
+
+      --color-border: rgba(255, 255, 255, 0.1);
+      --color-surface: rgba(255, 255, 255, 0.05);
+
+      --font-sans: "Noto Sans Variable", system-ui, sans-serif;
+      --font-serif: "Noto Serif Variable", serif;
+
+      --container-width: 1200px;
+      --container-padding: 1rem;
+    }
+
+    html {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-serif);
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Utilities */
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+    }
+
+    .text-gradient {
+      background: linear-gradient(
+        to right,
+        #818cf8,
+        #c084fc
+      ); /* indigo-400 to purple-400 */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Background */
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      height: 100%;
+      width: 100%;
+      background-color: var(--color-bg);
+      background-image: linear-gradient(
+          to right,
+          rgba(128, 128, 128, 0.04) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(128, 128, 128, 0.04) 1px,
+          transparent 1px
+        );
+      background-size: 14px 24px;
+    }
+
+    .blur-circle {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      margin: auto;
+      height: 310px;
+      width: 310px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      opacity: 0.2;
+      filter: blur(100px);
+      z-index: -10;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
 </html>
-<style is:global>
-  :root {
-    /* Color palette */
-    color-scheme: dark light;
-    --color-primary: #1e90ff;
-    --color-primary-dark: #00509e;
-    --color-primary-light: #b3d4fc;
-    --color-secondary: #ffc107;
-    --color-secondary-dark: #ffa726;
-    --color-secondary-light: #ffd380;
-    --color-tertiary: #ff5722;
-    --color-tertiary-dark: #e64a19;
-    --color-tertiary-light: #ffab91;
-    --color-bg-light: #f4f4f4;
-    --color-bg-dark: #333;
-    --color-text-dark: #4a4a4a;
-    --color-text-light: #fefefe;
-  }
-  /* Global styles */
-  body {
-    display: grid;
-    justify-content: center;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-text-dark);
-  }
-  h1 {
-    font-family: "Noto Serif", serif;
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-primary-dark);
-  }
-  h2 {
-    font-family: "Noto Serif", serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-primary-dark);
-  }
-  h3 {
-    font-family: "Noto Serif", serif;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-primary-dark);
-  }
-  h4 {
-    font-family: "Noto Serif", serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-primary-dark);
-  }
-  h5 {
-    font-family: "Noto Serif", serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-primary-dark);
-  }
-  h6 {
-    font-family: "Noto Serif", serif;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-primary-dark);
-  }
-  button {
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
-  }
-  button.primary {
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-  }
-  button.primary:hover {
-    background-color: var(--color-primary-dark);
-  }
-  button.secondary {
-    background-color: var(--color-secondary);
-    color: var(--color-text-dark);
-  }
-  button.secondary:hover {
-    background-color: var(--color-secondary-dark);
-  }
-  button.tertiary {
-    background-color: var(--color-tertiary);
-    color: var(--color-text-light);
-  }
-  button.tertiary:hover {
-    background-color: var(--color-tertiary-dark);
-  }
-  a {
-    color: var(--color-primary-dark);
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-  }
-  a:hover {
-    color: var(--color-primary);
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  @keyframes slideIn {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-</style>

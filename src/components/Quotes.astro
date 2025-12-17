@@ -1,0 +1,254 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import { quotes as quotesData } from "../i18n/data";
+
+const quotes = quotesData[lang];
+---
+
+<section id="quotes" class="quotes-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="text-gradient">
+                {t("nav.quotes")}
+            </span>
+        </h2>
+
+        <div class="quotes-wrapper">
+            <div class="quote-card">
+                <div class="quote-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="text-indigo-500/20"
+                        ><path
+                            d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"
+                        ></path><path
+                            d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"
+                        ></path></svg
+                    >
+                </div>
+
+                <div class="quote-content" id="carousel-track">
+                    <p class="quote-text" id="quote-text">"{quotes[0].text}"</p>
+                    <footer class="quote-author">
+                        <cite id="quote-author">— {quotes[0].author}</cite>
+                    </footer>
+                </div>
+
+                <div class="quote-controls">
+                    <button
+                        id="prev-btn"
+                        class="control-btn"
+                        aria-label="Previous quote"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path d="m15 18-6-6 6-6"></path></svg
+                        >
+                    </button>
+                    <div class="quote-indicators" id="quote-indicators">
+                        {
+                            quotes.map((_, i) => (
+                                <span
+                                    class={`indicator ${i === 0 ? "active" : ""}`}
+                                    data-index={i}
+                                />
+                            ))
+                        }
+                    </div>
+                    <button
+                        id="next-btn"
+                        class="control-btn"
+                        aria-label="Next quote"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path d="m9 18 6-6-6-6"></path></svg
+                        >
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script define:vars={{ quotes }}>
+    const quoteText = document.getElementById("quote-text");
+    const quoteAuthor = document.getElementById("quote-author");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const indicators = document.querySelectorAll(".indicator");
+
+    let currentIndex = 0;
+    const totalSlides = quotes.length;
+
+    function updateCarousel() {
+        if (quoteText && quoteAuthor) {
+            quoteText.textContent = `"${quotes[currentIndex].text}"`;
+            quoteAuthor.textContent = `— ${quotes[currentIndex].author}`;
+
+            indicators.forEach((ind, i) => {
+                if (i === currentIndex) {
+                    ind.classList.add("active");
+                } else {
+                    ind.classList.remove("active");
+                }
+            });
+        }
+    }
+
+    prevBtn?.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    });
+
+    nextBtn?.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+    });
+
+    // Auto-play
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+    }, 5000);
+</script>
+
+<style>
+    .quotes-section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .quotes-wrapper {
+        max-width: 56rem; /* max-w-4xl */
+        margin: 0 auto;
+    }
+
+    .quote-card {
+        position: relative;
+        background-color: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(4px);
+        border: 1px solid var(--color-border);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        text-align: center;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        .quote-card {
+            padding: 3rem;
+        }
+    }
+
+    .quote-icon {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        color: rgba(99, 102, 241, 0.2);
+    }
+
+    .quote-content {
+        margin-bottom: 2rem;
+    }
+
+    .quote-text {
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+    }
+
+    @media (min-width: 768px) {
+        .quote-text {
+            font-size: 1.5rem;
+        }
+    }
+
+    .quote-author {
+        font-size: 1.125rem;
+        color: var(--color-text-muted);
+        font-weight: 500;
+    }
+
+    .quote-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: auto;
+    }
+
+    .control-btn {
+        padding: 0.5rem;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.05);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .control-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .quote-indicators {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .indicator {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .indicator.active {
+        background-color: var(--color-primary);
+        width: 1.5rem;
+        border-radius: 9999px;
+    }
+</style>

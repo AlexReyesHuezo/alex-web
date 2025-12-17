@@ -1,12 +1,13 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const allPosts = await Astro.glob("./blog/*.md");
+// Note: In a real app, you'd filter for Spanish posts or have a separate folder
+const allPosts = await Astro.glob("../blog/*.md");
 const sortedPosts = allPosts.sort(
     (a, b) =>
         new Date(b.frontmatter.pubDate).valueOf() -
@@ -14,7 +15,7 @@ const sortedPosts = allPosts.sort(
 );
 ---
 
-<Layout title="Blog - Alexander Reyes">
+<Layout title="Blog - Alexander Reyes" lang="es">
     <Header />
     <main class="blog-page-main">
         <div class="container">

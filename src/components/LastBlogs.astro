@@ -17,6 +17,8 @@ const sortedPosts = posts
             new Date(a.frontmatter.pubDate).valueOf(),
     )
     .slice(0, 3);
+
+import ComingSoon from "./comingSoon.astro";
 ---
 
 <section id="blogs" class="blogs-section">
@@ -27,6 +29,9 @@ const sortedPosts = posts
             </span>
         </h2>
 
+        <ComingSoon />
+
+        <!--
         <div class="blogs-grid">
             {
                 sortedPosts.map((post) => (
@@ -92,6 +97,7 @@ const sortedPosts = posts
                 >
             </a>
         </div>
+        -->
     </div>
 </section>
 

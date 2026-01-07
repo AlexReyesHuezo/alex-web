@@ -7,6 +7,8 @@ const t = useTranslations(lang);
 import { projects as projectsData } from "../i18n/data";
 
 const projects = projectsData[lang];
+
+import ComingSoon from "./comingSoon.astro";
 ---
 
 <section id="projects" class="projects-section">
@@ -17,6 +19,9 @@ const projects = projectsData[lang];
             </span>
         </h2>
 
+        <ComingSoon />
+
+        <!--
         <div class="projects-grid">
             {
                 projects.map((project) => (
@@ -90,6 +95,7 @@ const projects = projectsData[lang];
                 ))
             }
         </div>
+        -->
     </div>
 </section>
 

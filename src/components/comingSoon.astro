@@ -1,11 +1,76 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section>
-  <p>Coming Soon</p>
-  <p>
-    I am working hard to bring you some useful and interesting features and
-    resources.
+<div class="coming-soon-card">
+  <div class="icon-wrapper">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+  </div>
+  <h3 class="title">
+    <span class="text-gradient">Coming Soon</span>
+  </h3>
+  <p class="description">
+    I am working hard to bring you some useful and interesting content and
+    resources. Stay tuned!
   </p>
-</section>
+</div>
+
+<style>
+  .coming-soon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+
+  .coming-soon-card:hover {
+    border-color: rgba(99, 102, 241, 0.5); /* indigo-500/50 */
+    transform: translateY(-5px);
+  }
+
+  .icon-wrapper {
+    display: inline-flex;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 400px;
+  }
+</style>

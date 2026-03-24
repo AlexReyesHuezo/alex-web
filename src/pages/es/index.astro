@@ -7,7 +7,7 @@ import Projects from "../../components/Projects.astro";
 import Quotes from "../../components/Quotes.astro";
 import LastBlogs from "../../components/LastBlogs.astro";
 import Header from "../../components/Header.astro";
-const posts = await Astro.glob("./blog/*.md");
+const posts = Object.values(import.meta.glob("./blog/*.md", { eager: true })) as any[];
 ---
 
 <Layout title="Alexander Reyes - Desarrollador" lang="es">

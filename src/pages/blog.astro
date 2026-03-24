@@ -6,7 +6,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const allPosts = await Astro.glob("./blog/*.md");
+const allPosts = Object.values(import.meta.glob("./blog/*.md", { eager: true })) as any[];
 const sortedPosts = allPosts.sort(
     (a, b) =>
         new Date(b.frontmatter.pubDate).valueOf() -

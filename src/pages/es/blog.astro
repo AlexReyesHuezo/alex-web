@@ -7,7 +7,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 // Note: In a real app, you'd filter for Spanish posts or have a separate folder
-const allPosts = await Astro.glob("../blog/*.md");
+const allPosts = Object.values(import.meta.glob("../blog/*.md", { eager: true })) as any[];
 const sortedPosts = allPosts.sort(
     (a, b) =>
         new Date(b.frontmatter.pubDate).valueOf() -

@@ -1,14 +1,13 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import ComingSoon from "./comingSoon.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-import { projects as projectsData } from "../i18n/data";
-
-const projects = projectsData[lang];
-
-import ComingSoon from "./comingSoon.astro";
+// Restore when the projects grid below is re-enabled:
+// import { projects as projectsData } from "../i18n/data";
+// const projects = projectsData[lang];
 ---
 
 <section id="projects" class="projects-section">

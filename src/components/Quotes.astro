@@ -95,7 +95,7 @@ const quotes = quotesData[lang];
     </div>
 </section>
 
-<script define:vars={{ quotes }}>
+<script is:inline define:vars={{ quotes }}>
     const quoteText = document.getElementById("quote-text");
     const quoteAuthor = document.getElementById("quote-author");
     const prevBtn = document.getElementById("prev-btn");

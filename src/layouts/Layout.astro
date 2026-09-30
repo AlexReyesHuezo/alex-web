@@ -29,7 +29,8 @@ const { title, lang = "en" } = Astro.props;
     </div>
     <slot />
     <Footer />
-  </body><style is:global>
+  </body>
+  <style is:global>
     :root {
       --color-bg: #020617; /* slate-950 */
       --color-text: #f1f5f9; /* slate-100 */
@@ -117,7 +118,8 @@ const { title, lang = "en" } = Astro.props;
       height: 100%;
       width: 100%;
       background-color: var(--color-bg);
-      background-image: linear-gradient(
+      background-image:
+        linear-gradient(
           to right,
           rgba(128, 128, 128, 0.04) 1px,
           transparent 1px

@@ -5,154 +5,148 @@ import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 
-const allPosts = Object.values(import.meta.glob("./blog/*.md", { eager: true })) as any[];
+const allPosts = Object.values(
+  import.meta.glob("./blog/*.md", { eager: true }),
+) as any[];
 const sortedPosts = allPosts.sort(
-    (a, b) =>
-        new Date(b.frontmatter.pubDate).valueOf() -
-        new Date(a.frontmatter.pubDate).valueOf(),
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf(),
 );
 ---
 
 <Layout title="Blog - Alexander Reyes">
-    <Header />
-    <main class="blog-page-main">
-        <div class="container">
-            <h1 class="page-title">
-                <span class="text-gradient"> Blog </span>
-            </h1>
+  <Header />
+  <main class="blog-page-main">
+    <div class="container">
+      <h1 class="page-title">
+        <span class="text-gradient"> Blog </span>
+      </h1>
 
-            <div class="blog-grid">
-                {
-                    sortedPosts.map((post) => (
-                        <a href={post.url} class="blog-card group">
-                            <div class="blog-image-wrapper">
-                                <img
-                                    src={
-                                        post.frontmatter.image ||
-                                        "https://via.placeholder.com/400x200"
-                                    }
-                                    alt={post.frontmatter.title}
-                                    class="blog-image"
-                                />
-                            </div>
-                            <div class="blog-content">
-                                <p class="blog-date">
-                                    {new Date(
-                                        post.frontmatter.pubDate,
-                                    ).toLocaleDateString(lang, {
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "numeric",
-                                    })}
-                                </p>
-                                <h3 class="blog-title">
-                                    {post.frontmatter.title}
-                                </h3>
-                                <p class="blog-desc">
-                                    {post.frontmatter.description}
-                                </p>
-                            </div>
-                        </a>
-                    ))
+      <div class="blog-grid">
+        {sortedPosts.map((post) => (
+          <a href={post.url} class="blog-card group">
+            <div class="blog-image-wrapper">
+              <img
+                src={
+                  post.frontmatter.image ||
+                  "https://via.placeholder.com/400x200"
                 }
+                alt={post.frontmatter.title}
+                class="blog-image"
+              />
             </div>
-        </div>
-    </main>
+            <div class="blog-content">
+              <p class="blog-date">
+                {new Date(post.frontmatter.pubDate).toLocaleDateString(lang, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+              <h3 class="blog-title">{post.frontmatter.title}</h3>
+              <p class="blog-desc">{post.frontmatter.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
 </Layout>
 
 <style>
-    .blog-page-main {
-        padding-top: 6rem;
-        padding-bottom: 5rem;
-    }
+  .blog-page-main {
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+  }
 
-    .page-title {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 3rem;
-        text-align: center;
-    }
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
 
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
     .blog-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
-    @media (min-width: 768px) {
-        .blog-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+  @media (min-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
+  }
 
-    @media (min-width: 1024px) {
-        .blog-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
+  .blog-card {
+    display: block;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
 
-    .blog-card {
-        display: block;
-        border-radius: 1rem;
-        overflow: hidden;
-        background-color: var(--color-surface);
-        border: 1px solid var(--color-border);
-        transition: all 0.3s ease;
-        text-decoration: none;
-        color: inherit;
-    }
+  .blog-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(99, 102, 241, 0.5);
+  }
 
-    .blog-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(99, 102, 241, 0.5);
-    }
+  .blog-image-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
 
-    .blog-image-wrapper {
-        position: relative;
-        aspect-ratio: 16 / 9;
-        overflow: hidden;
-    }
+  .blog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
 
-    .blog-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
+  .blog-card:hover .blog-image {
+    transform: scale(1.1);
+  }
 
-    .blog-card:hover .blog-image {
-        transform: scale(1.1);
-    }
+  .blog-content {
+    padding: 1.5rem;
+  }
 
-    .blog-content {
-        padding: 1.5rem;
-    }
+  .blog-date {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
 
-    .blog-date {
-        font-size: 0.875rem;
-        color: var(--color-primary);
-        margin-bottom: 0.5rem;
-    }
+  .blog-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+  }
 
-    .blog-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-        line-height: 1.4;
-        transition: color 0.3s ease;
-    }
+  .blog-card:hover .blog-title {
+    color: var(--color-primary);
+  }
 
-    .blog-card:hover .blog-title {
-        color: var(--color-primary);
-    }
-
-    .blog-desc {
-        font-size: 0.875rem;
-        color: var(--color-text-muted);
-        line-height: 1.5;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
+  .blog-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 </style>

@@ -11,16 +11,14 @@ const t = useTranslations(lang);
 ---
 
 <section id="projects" class="projects-section">
-    <div class="container">
-        <h2 class="section-title">
-            <span class="text-gradient">
-                {t("nav.projects")}
-            </span>
-        </h2>
+  <div class="container">
+    <h2 class="section-title">
+      <span class="text-gradient">{t("nav.projects")}</span>
+    </h2>
 
-        <ComingSoon />
+    <ComingSoon />
 
-        <!--
+    <!--
         <div class="projects-grid">
             {
                 projects.map((project) => (
@@ -95,138 +93,138 @@ const t = useTranslations(lang);
             }
         </div>
         -->
-    </div>
+  </div>
 </section>
 
 <style>
-    .projects-section {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-        position: relative;
-    }
+  .projects-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    position: relative;
+  }
 
-    .section-title {
-        font-size: 2.25rem;
-        font-weight: 700;
-        margin-bottom: 3rem;
-        text-align: center;
-    }
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
 
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
     .projects-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
-    @media (min-width: 768px) {
-        .projects-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
+  }
 
-    @media (min-width: 1024px) {
-        .projects-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
+  .project-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+  }
 
-    .project-card {
-        position: relative;
-        border-radius: 1rem;
-        overflow: hidden;
-        background-color: var(--color-surface);
-        border: 1px solid var(--color-border);
-        transition: all 0.3s ease;
-    }
+  .project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(99, 102, 241, 0.5); /* indigo-500/50 */
+  }
 
-    .project-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(99, 102, 241, 0.5); /* indigo-500/50 */
-    }
+  .project-image-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
 
-    .project-image-wrapper {
-        position: relative;
-        aspect-ratio: 16 / 9;
-        overflow: hidden;
-    }
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
 
-    .project-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
+  .project-card:hover .project-image {
+    transform: scale(1.1);
+  }
 
-    .project-card:hover .project-image {
-        transform: scale(1.1);
-    }
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(2, 6, 23, 0.8); /* slate-950/80 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
 
-    .project-overlay {
-        position: absolute;
-        inset: 0;
-        background-color: rgba(2, 6, 23, 0.8); /* slate-950/80 */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
 
-    .project-card:hover .project-overlay {
-        opacity: 1;
-    }
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
 
-    .project-links {
-        display: flex;
-        gap: 1rem;
-        transform: translateY(20px);
-        transition: transform 0.3s ease;
-    }
+  .project-card:hover .project-links {
+    transform: translateY(0);
+  }
 
-    .project-card:hover .project-links {
-        transform: translateY(0);
-    }
+  .project-link {
+    padding: 0.75rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: background-color 0.3s ease;
+  }
 
-    .project-link {
-        padding: 0.75rem;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.1);
-        color: white;
-        transition: background-color 0.3s ease;
-    }
+  .project-link:hover {
+    background-color: var(--color-primary);
+  }
 
-    .project-link:hover {
-        background-color: var(--color-primary);
-    }
+  .project-content {
+    padding: 1.5rem;
+  }
 
-    .project-content {
-        padding: 1.5rem;
-    }
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
 
-    .project-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
 
-    .project-desc {
-        font-size: 0.875rem;
-        color: var(--color-text-muted);
-        margin-bottom: 1rem;
-        line-height: 1.5;
-    }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 
-    .project-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .project-tag {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        background-color: rgba(99, 102, 241, 0.1); /* indigo-500/10 */
-        color: #818cf8; /* indigo-400 */
-    }
+  .project-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background-color: rgba(99, 102, 241, 0.1); /* indigo-500/10 */
+    color: #818cf8; /* indigo-400 */
+  }
 </style>

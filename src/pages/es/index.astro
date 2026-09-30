@@ -7,17 +7,19 @@ import Projects from "../../components/Projects.astro";
 import Quotes from "../../components/Quotes.astro";
 import LastBlogs from "../../components/LastBlogs.astro";
 import Header from "../../components/Header.astro";
-const posts = Object.values(import.meta.glob("./blog/*.md", { eager: true })) as any[];
+const posts = Object.values(
+  import.meta.glob("./blog/*.md", { eager: true }),
+) as any[];
 ---
 
 <Layout title="Alexander Reyes - Desarrollador" lang="es">
-    <Header />
-    <main>
-        <Hero />
-        <Social />
-        <Projects />
-        <Stack />
-        <LastBlogs posts={posts} />
-        <Quotes />
-    </main>
+  <Header />
+  <main>
+    <Hero />
+    <Social />
+    <Projects />
+    <Stack />
+    <LastBlogs posts={posts} />
+    <Quotes />
+  </main>
 </Layout>

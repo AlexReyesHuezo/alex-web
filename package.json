@@ -13,7 +13,7 @@
     "@astrojs/check": "^0.9.10",
     "@fontsource-variable/noto-sans": "^5.0.5",
     "@fontsource-variable/noto-serif": "^5.0.6",
-    "astro": "^7.3.5"
+    "astro": "7.3.6"
   },
   "devDependencies": {
     "prettier": "^3.9.9",
